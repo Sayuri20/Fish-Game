@@ -1,0 +1,14 @@
+{
+  "name": "pearlpop",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Basic PearlPop counting game with readable JavaScript and documented AI assistance",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test tests/game.test.mjs tests/storage-auth.test.mjs tests/server.test.mjs tests/database.test.mjs && node smoke-check.mjs"
+  },
+  "dependencies": {
+    "better-sqlite3": "11.10.0"
+  }
+}

@@ -1,0 +1,22 @@
+# Private accounts, databases, backups and runtime logs
+data/
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+*.bak
+*.log
+
+# Secrets and local settings
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.npmrc
+
+# Installed packages and generated archives
+node_modules/
+*.zip
+.DS_Store
+Thumbs.db
