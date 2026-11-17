@@ -31,6 +31,6 @@ export function playTone(kind, enabled) {
     oscillator.start();
     oscillator.stop(audioContext.currentTime + 0.2);
   } catch (error) {
-    // Sound is optional. The game can continue if a browser blocks it.
+    // I let the game continue even if the browser blocks the sound.
   }
 }

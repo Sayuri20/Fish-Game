@@ -1,0 +1,3603 @@
+/* Illustrated assets and 2D transforms; no 3D engine. */
+.rescue-art,
+.venom-art {
+  display: inline-block;
+  background-repeat: no-repeat;
+  flex-shrink: 0;
+  pointer-events: none;
+  width: 140px;
+  height: 140px;
+}
+.rescue-art {
+  background-image: url("assets/rescue/sprites.png");
+  background-size: 400% 300%;
+}
+.art-hamster {
+  background-position: 0 0;
+}
+.art-turtle {
+  background-position: 33.333% 0;
+}
+.art-crab {
+  background-position: 66.667% 0;
+}
+.art-coral {
+  background-position: 100% 0;
+}
+.art-plant {
+  background-position: 0 50%;
+}
+.art-shell {
+  background-position: 33.333% 50%;
+}
+.art-chest {
+  background-position: 66.667% 50%;
+}
+.art-jelly {
+  background-position: 100% 50%;
+}
+.art-rock {
+  background-position: 0 100%;
+}
+.art-bottle {
+  background-position: 33.333% 100%;
+}
+.art-bag {
+  background-position: 66.667% 100%;
+}
+.art-basket {
+  background-position: 100% 100%;
+}
+.venom-art {
+  background-image: url("assets/rescue/survival.png");
+  background-size: 200% 200%;
+}
+.venom-jellyboss {
+  background-image: url("assets/rescue/jellyfish-villain-v3.png");
+  background-size: contain;
+  background-position: center;
+}
+.venom-star {
+  background-position: 100% 0;
+}
+.venom-conch {
+  background-position: 0 100%;
+}
+.venom-venom {
+  background-position: 100% 100%;
+}
+.rescue-button {
+  border: 0;
+  border-radius: 20px;
+  background: #8cf0d5;
+  color: #141e44;
+  min-height: 44px;
+  padding: 10px 23px;
+  font:
+    900 16px Nunito,
+    sans-serif;
+  box-shadow: 0 5px #0e173a;
+  cursor: pointer;
+}
+.rescue-button.secondary {
+  background: #c8b6ff;
+}
+.rescue-button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+.rescue-button:focus-visible,
+button[data-swim]:focus-visible,
+.fire-button:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 3px;
+}
+.rescue-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0;
+}
+.icon-button {
+  padding: 5px 16px;
+  min-height: 34px;
+}
+.rescue-home {
+  min-height: 540px;
+  position: relative;
+  overflow: hidden;
+}
+.rescue-home-copy {
+  padding: 35px 0;
+  width: 54%;
+  position: relative;
+  z-index: 2;
+}
+.rescue-home h2 {
+  font-size: clamp(32px, 4vw, 54px);
+  line-height: 1.15;
+}
+.rescue-home p {
+  color: #adbfdd;
+}
+.rescue-home .button-row {
+  justify-content: flex-start;
+  margin: 28px 0;
+}
+.home-pearls {
+  color: #8cf0d5 !important;
+  font-size: 22px;
+}
+.rescue-hero-art {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50%;
+  height: 420px;
+}
+.rescue-hero-art .art-hamster {
+  position: absolute;
+  width: clamp(210px, 25vw, 300px);
+  height: clamp(210px, 25vw, 300px);
+  right: 130px;
+  top: 5px;
+  animation: captain-float 5s ease-in-out infinite;
+}
+.rescue-hero-art .venom-jellyboss {
+  position: absolute;
+  width: clamp(180px, 20vw, 260px);
+  height: clamp(180px, 20vw, 260px);
+  right: 0;
+  top: 190px;
+  animation: jelly-hover 4s ease-in-out infinite;
+}
+.rescue-home-floor {
+  position: absolute;
+  bottom: -20px;
+  inset-inline: 0;
+  display: flex;
+  justify-content: space-between;
+}
+.rescue-home-floor .rescue-art {
+  width: 140px;
+  height: 140px;
+}
+.auth-captain {
+  position: absolute;
+  right: 0;
+  bottom: 20px;
+  width: clamp(200px, 25vw, 300px);
+  height: clamp(200px, 25vw, 300px);
+  animation: captain-float 5s ease-in-out infinite;
+}
+.auth-intro {
+  min-height: 470px;
+}
+#rescue-root {
+  max-width: 1300px;
+  margin: auto;
+}
+.rescue-layout .back-to-play,
+.rescue-layout footer,
+.rescue-layout #app > .ocean-decoration {
+  display: none;
+}
+.survival-intro,
+.survival-results {
+  text-align: center;
+}
+.survival-intro h1,
+.survival-results h1 {
+  font-size: clamp(28px, 4vw, 42px);
+}
+.survival-intro-art {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 90px;
+}
+.survival-intro-art .rescue-art,
+.survival-intro-art .venom-art {
+  width: clamp(150px, 20vw, 250px);
+  height: clamp(150px, 20vw, 250px);
+}
+.intro-rules {
+  display: flex;
+  gap: 45px;
+  justify-content: center;
+  color: #8cf0d5;
+  font-size: 25px;
+  font-weight: 900;
+}
+.intro-rules small {
+  display: block;
+  color: #adbfdd;
+  font-size: 13px;
+}
+.survival-intro p {
+  color: #adbfdd;
+}
+.survival-game {
+  height: calc(100dvh - 108px);
+  min-height: 480px;
+  max-height: 960px;
+  position: relative;
+  display: grid;
+  grid-template-rows: 65px 27px minmax(200px, 1fr) 25px auto 58px;
+  isolation: isolate;
+}
+.survival-game:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: linear-gradient(#121c42, #080c25);
+  opacity: var(--sea-depth, 0);
+  pointer-events: none;
+}
+.survival-hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.survival-hud > div:first-child > strong {
+  display: block;
+  font-size: 14px;
+  color: #adbfdd;
+}
+.survival-clock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.survival-clock > strong {
+  font-size: 27px;
+  color: #ffe59b;
+}
+.survival-clock > span {
+  font-size: 12px;
+  color: #adbfdd;
+}
+.survival-resources {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 900;
+}
+.survival-resources > span:first-child {
+  color: #8cf0d5;
+}
+.survival-resources > span:nth-child(2) {
+  color: #c8b6ff;
+}
+#survival-lives {
+  font-size: 28px;
+  color: #f7abd1;
+  letter-spacing: 4px;
+}
+.empty-life {
+  opacity: 0.18;
+}
+.survival-goals {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  font-size: 13px;
+  font-weight: 900;
+  color: #adbfdd;
+}
+.survival-goals .done {
+  color: #8cf0d5;
+}
+.survival-stage {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  isolation: isolate;
+  touch-action: none;
+}
+.survival-haze {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at bottom, #335c5922, transparent 70%);
+  z-index: -3;
+}
+.survival-world {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 500%;
+  pointer-events: none;
+  z-index: -1;
+  will-change: transform;
+}
+.survival-region {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 20%;
+  overflow: hidden;
+}
+.region-0 {
+  top: 0;
+}
+.region-1 {
+  top: 33.3333%;
+  background: radial-gradient(ellipse at 50% 100%, #82618f33, transparent 70%);
+}
+.region-2 {
+  top: 66.6666%;
+  background: radial-gradient(ellipse at 50% 100%, #544d9b33, transparent 70%);
+}
+.scenery {
+  position: absolute;
+  width: clamp(55px, 9vw, 115px);
+  height: clamp(55px, 9vw, 115px);
+  filter: drop-shadow(0 6px 10px #020a2488);
+}
+.scenery-0 {
+  left: -2%;
+  bottom: 0;
+  transform: scale(1.3);
+}
+.scenery-1 {
+  left: 15%;
+  bottom: -2%;
+  transform: scale(0.8);
+}
+.scenery-2 {
+  left: 34%;
+  bottom: -2%;
+  transform: scale(0.6);
+}
+.scenery-3 {
+  left: 54%;
+  bottom: -2%;
+  transform: scale(0.8);
+}
+.scenery-4 {
+  left: 74%;
+  bottom: 0;
+}
+.scenery-5 {
+  right: -3%;
+  bottom: 0;
+  transform: scale(1.4);
+}
+.scenery-6 {
+  left: -5%;
+  top: 2%;
+  opacity: 0.3;
+  transform: scale(1.8);
+}
+.scenery-7 {
+  right: -4%;
+  top: 40%;
+  opacity: 0.25;
+  transform: scale(1.7);
+}
+.survival-sand {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  height: 90px;
+  bottom: -65px;
+  border-radius: 55% 70% 0 0;
+  background: linear-gradient(#728f8a44, #162547);
+}
+.survival-far {
+  position: absolute;
+  inset: -10%;
+  z-index: -2;
+  opacity: 0.2;
+  background:
+    radial-gradient(ellipse 100px 250px at 20% 90%, #437a77, transparent),
+    radial-gradient(ellipse 150px 280px at 80% 80%, #4d426c, transparent);
+}
+.survival-near {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+.survival-near .rescue-art {
+  position: absolute;
+  bottom: -45px;
+  width: clamp(70px, 12vw, 150px);
+  height: clamp(70px, 12vw, 150px);
+  filter: blur(0.5px);
+}
+.survival-near .art-coral {
+  left: -45px;
+}
+.survival-near .art-rock {
+  right: -45px;
+}
+.water-stream {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.water-stream i {
+  position: absolute;
+  left: 10%;
+  bottom: -12px;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #8ce8ef55;
+  border-radius: 50%;
+  animation: water-up 8s linear infinite;
+}
+.water-stream i:nth-child(2) {
+  left: 45%;
+  animation-delay: -4s;
+  width: 25px;
+  height: 25px;
+}
+.water-stream i:nth-child(3) {
+  left: 75%;
+  animation-delay: -2s;
+}
+.water-stream i:nth-child(4) {
+  left: 90%;
+  animation-delay: -6s;
+  width: 8px;
+  height: 8px;
+}
+.survival-player {
+  position: absolute;
+  width: clamp(65px, 8vw, 105px);
+  height: clamp(65px, 8vw, 105px);
+  transform: translate(-50%, -50%);
+  z-index: 8;
+  pointer-events: none;
+}
+.survival-player > .rescue-art {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 6px 8px #0007);
+}
+.survival-player.protected {
+  filter: drop-shadow(0 0 7px #8cf0d5aa);
+}
+.bubble-gun {
+  position: absolute;
+  right: -3px;
+  top: 48%;
+  width: 20%;
+  height: 8px;
+  background: linear-gradient(#d8fff6, #439f9e);
+  border-radius: 4px;
+  box-shadow: 0 0 5px #8cf0d5;
+}
+.engine-stream {
+  position: absolute;
+  left: -10px;
+  top: 45%;
+}
+.engine-stream i {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border: 1px solid #8cf0d588;
+  border-radius: 50%;
+  animation: engine-bubble 1s linear infinite;
+}
+.engine-stream i:nth-child(2) {
+  top: 10px;
+  animation-delay: -0.5s;
+}
+.survival-enemy {
+  position: absolute;
+  width: clamp(95px, 13vw, 165px);
+  height: clamp(95px, 13vw, 165px);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 7;
+}
+.survival-enemy > .venom-art {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 12px #b07aff44);
+  animation: jelly-hover 3s ease-in-out infinite;
+}
+.survival-enemy.firing > .venom-art {
+  filter: drop-shadow(0 0 18px #8cff5866);
+}
+.survival-enemy.stunned {
+  opacity: 0.5;
+}
+.survival-enemy.stunned > .venom-art {
+  animation: jelly-stun 0.4s linear infinite;
+}
+.enemy-health {
+  height: 4px;
+  background: #ffffff22;
+  border-radius: 3px;
+  margin: 0 auto;
+  width: 60%;
+}
+.enemy-health span {
+  height: 100%;
+  display: block;
+  background: #b4ee72;
+  border-radius: 3px;
+  transition: width 0.15s;
+}
+#enemy-state {
+  display: block;
+  text-align: center;
+  color: #c8b6ff;
+  font-size: 10px;
+  font-weight: 900;
+  margin-top: 4px;
+}
+.survival-object {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 0;
+  border: 0;
+  background: none;
+  z-index: 5;
+}
+.object-item {
+  width: clamp(35px, 4.2vw, 56px);
+  height: clamp(35px, 4.2vw, 56px);
+  cursor: pointer;
+  filter: drop-shadow(0 3px 6px #0005);
+}
+.object-item > .rescue-art,
+.object-item > .venom-art {
+  width: 100%;
+  height: 100%;
+}
+.object-item:focus-visible {
+  outline: 2px solid #8cf0d5;
+}
+.object-poison {
+  width: clamp(24px, 2.8vw, 36px);
+  height: clamp(24px, 2.8vw, 36px);
+  pointer-events: none;
+  z-index: 9;
+}
+.object-poison > .venom-art {
+  width: 100%;
+  height: 100%;
+}
+.object-shot {
+  width: 17px;
+  height: 17px;
+  border: 2px solid #b5fff1;
+  border-radius: 50%;
+  box-shadow:
+    0 0 12px #8cf0d5,
+    inset 3px 3px 6px #ffffff88;
+  background: #8cf0d522;
+  pointer-events: none;
+  z-index: 9;
+}
+.survival-fish {
+  position: absolute;
+  left: 26%;
+  top: 2%;
+  width: 43%;
+  height: 30%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  align-items: center;
+  justify-items: center;
+  z-index: 6;
+}
+.s-count-fish {
+  position: relative;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  width: clamp(35px, 5vw, 65px);
+  max-width: 100%;
+}
+.s-count-fish img {
+  display: block;
+  width: 100%;
+}
+.s-count-fish.marked:after {
+  content: "✓";
+  position: absolute;
+  right: 0;
+  top: -2px;
+  background: #8cf0d5;
+  color: #141e44;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 900;
+  width: 17px;
+  height: 17px;
+}
+.survival-fish.count-finished {
+  pointer-events: none;
+}
+.survival-answers {
+  display: flex;
+  gap: 7px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 3px 0 6px;
+}
+.survival-answers .rescue-button {
+  min-width: 48px;
+  padding: 8px 14px;
+  background: #c8b6ff;
+  min-height: 40px;
+}
+.survival-message {
+  text-align: center;
+  min-height: 20px;
+  margin: 2px;
+  font-size: 13px;
+  color: #ffe59b;
+  font-weight: 900;
+}
+.survival-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 5px 0;
+}
+.swim-pad {
+  display: flex;
+  gap: 6px;
+}
+.swim-pad button {
+  width: 45px;
+  height: 42px;
+  border: 0;
+  border-radius: 15px;
+  background: #c8b6ff;
+  color: #141e44;
+  font-size: 24px;
+  cursor: pointer;
+  touch-action: none;
+}
+.fire-button {
+  min-height: 46px;
+  padding: 9px 26px;
+  border: 0;
+  border-radius: 24px;
+  font: 900 17px Nunito;
+  background: #8cf0d5;
+  color: #141e44;
+  box-shadow: 0 5px #0e173a;
+  cursor: pointer;
+  touch-action: none;
+}
+.control-hint {
+  font-size: 12px;
+  color: #adbfdd;
+  text-align: center;
+}
+.no-ammo .fire-button {
+  background: #adbfdd;
+}
+.no-ammo .object-item {
+  filter: drop-shadow(0 0 8px #ffe59baa);
+}
+.swim-target {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border: 1px solid #8cf0d588;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+  z-index: 4;
+}
+.swim-target[hidden] {
+  display: none;
+}
+.survival-banner {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  font: 900 27px Nunito;
+  color: #dcfff1;
+  text-shadow: 0 3px 15px #0009;
+  z-index: 12;
+  pointer-events: none;
+  text-align: center;
+}
+.is-diving .survival-fish,
+.is-diving .survival-object,
+.is-diving .survival-answers {
+  visibility: hidden;
+}
+.is-diving .survival-player {
+  rotate: 12deg;
+}
+.is-diving .survival-enemy {
+  opacity: 0.3;
+}
+.is-paused * {
+  animation-play-state: paused !important;
+}
+.survival-pause {
+  position: absolute;
+  inset: 0;
+  background: #10182dcc;
+  z-index: 25;
+  display: grid;
+  place-items: center;
+}
+.survival-pause section {
+  padding: 25px;
+  text-align: center;
+  background: #253357;
+  border: 1px solid #8cf0d533;
+  border-radius: 25px;
+}
+.survival-pause h2 {
+  font-size: 30px;
+}
+.survival-pause button {
+  margin: 8px;
+}
+.poison-flash {
+  box-shadow: inset 0 0 40px #a7ee6b33;
+}
+.result-art {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.result-art > .rescue-art {
+  width: 240px;
+  height: 240px;
+}
+.result-art > .venom-art {
+  width: 190px;
+  height: 190px;
+}
+.survival-summary {
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  font-size: 24px;
+  font-weight: 900;
+  color: #8cf0d5;
+}
+.survival-results p {
+  color: #adbfdd;
+}
+.living-reef > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.living-reef > header strong {
+  font-size: 25px;
+  color: #8cf0d5;
+}
+.reef-ocean {
+  position: relative;
+  height: 430px;
+  overflow: hidden;
+}
+.reef-patch {
+  position: absolute;
+  top: 50%;
+  width: clamp(70px, 10vw, 125px);
+  height: clamp(70px, 10vw, 125px);
+  border: 0;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+.reef-patch > .rescue-art {
+  width: 100%;
+  height: 100%;
+  filter: grayscale(1);
+  opacity: 0.25;
+}
+.reef-patch.grown > .rescue-art {
+  filter: none;
+  opacity: 1;
+}
+.reef-patch > span:not(.rescue-art) {
+  position: absolute;
+  inset: 50% 0 auto;
+  font: 900 18px Nunito;
+  color: #ffe59b;
+}
+.patch-0 {
+  left: 2%;
+}
+.patch-1 {
+  left: 18%;
+  top: 35%;
+}
+.patch-2 {
+  left: 34%;
+}
+.patch-3 {
+  left: 50%;
+  top: 35%;
+}
+.patch-4 {
+  left: 66%;
+}
+.patch-5 {
+  left: 81%;
+  top: 35%;
+}
+.reef-swimmer {
+  position: absolute;
+  top: 20%;
+  width: 75px;
+  animation: reef-swim 15s linear infinite;
+}
+.reef-swimmer.second {
+  top: 42%;
+  animation-delay: -8s;
+  width: 55px;
+}
+@keyframes captain-float {
+  50% {
+    transform: translateY(-12px) rotate(-2deg);
+  }
+}
+@keyframes jelly-hover {
+  50% {
+    transform: translateY(-7px) scaleX(0.96) rotate(-4deg);
+  }
+}
+@keyframes jelly-stun {
+  50% {
+    transform: rotate(5deg);
+  }
+}
+@keyframes water-up {
+  to {
+    transform: translateY(-500px);
+    opacity: 0;
+  }
+}
+@keyframes engine-bubble {
+  to {
+    transform: translateX(-25px);
+    opacity: 0;
+  }
+}
+@keyframes reef-swim {
+  from {
+    left: -100px;
+  }
+  to {
+    left: 110%;
+  }
+}
+.reduced-motion .rescue-art,
+.reduced-motion .venom-art,
+.reduced-motion .water-stream i,
+.reduced-motion .engine-stream i,
+.reduced-motion .reef-swimmer {
+  animation: none !important;
+}
+.reduced-motion .enemy-health span {
+  transition: none;
+}
+@media (max-width: 767px) {
+  .rescue-layout .nav-rail {
+    display: none;
+  }
+  .rescue-layout .app-shell {
+    padding-bottom: 6px;
+  }
+  .survival-game {
+    height: calc(100dvh - 85px);
+    min-height: 470px;
+    grid-template-rows: 60px 24px minmax(180px, 1fr) 32px auto 52px;
+  }
+  .survival-hud {
+    gap: 5px;
+  }
+  .survival-hud > div:first-child > strong {
+    font-size: 11px;
+    max-width: 110px;
+  }
+  .survival-clock > strong {
+    font-size: 23px;
+  }
+  .survival-resources {
+    gap: 5px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    font-size: 11px;
+  }
+  .survival-resources .icon-button {
+    grid-column: 2;
+    grid-row: 1/3;
+    padding: 3px 12px;
+    min-height: 32px;
+  }
+  .survival-resources > span {
+    grid-column: 1;
+  }
+  #survival-lives {
+    font-size: 23px;
+    letter-spacing: 1px;
+  }
+  .survival-goals {
+    gap: 12px;
+    font-size: 11px;
+  }
+  .survival-player {
+    width: 65px;
+    height: 65px;
+  }
+  .survival-enemy {
+    width: 100px;
+    height: 100px;
+  }
+  #enemy-state {
+    font-size: 8px;
+  }
+  .survival-enemy {
+    translate: -7px 0;
+  }
+  .survival-fish {
+    left: 26%;
+    width: 43%;
+    top: 1%;
+    height: 31%;
+  }
+  .s-count-fish {
+    width: 39px;
+  }
+  .survival-answers {
+    gap: 5px;
+    padding: 2px 0 5px;
+  }
+  .survival-answers .rescue-button {
+    width: 17%;
+    min-width: 0;
+    min-height: 36px;
+    padding: 5px;
+    font-size: 14px;
+  }
+  .control-hint {
+    display: none;
+  }
+  .swim-pad {
+    gap: 4px;
+  }
+  .swim-pad button {
+    width: 34px;
+    height: 37px;
+    font-size: 21px;
+    border-radius: 12px;
+  }
+  .fire-button {
+    min-height: 40px;
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+  .survival-message {
+    font-size: 11px;
+    line-height: 1.2;
+  }
+  .survival-near .rescue-art {
+    width: 90px;
+    height: 90px;
+  }
+  .scenery {
+    width: 65px;
+    height: 65px;
+  }
+  .object-item {
+    width: 36px;
+    height: 36px;
+  }
+  .object-poison {
+    width: 24px;
+    height: 24px;
+  }
+  .object-shot {
+    width: 13px;
+    height: 13px;
+  }
+  .survival-banner {
+    font-size: 22px;
+    width: 85%;
+  }
+  .survival-intro-art {
+    gap: 10px;
+  }
+  .survival-intro-art > .rescue-art,
+  .survival-intro-art > .venom-art {
+    width: 155px;
+    height: 155px;
+  }
+  .intro-rules {
+    gap: 16px;
+    font-size: 18px;
+  }
+  .intro-rules small {
+    font-size: 10px;
+  }
+  .survival-intro > p {
+    font-size: 13px;
+  }
+  .survival-intro h1 {
+    font-size: 29px;
+  }
+  .survival-summary {
+    font-size: 19px;
+    gap: 20px;
+  }
+  .result-art > .rescue-art {
+    width: 190px;
+    height: 190px;
+  }
+  .result-art > .venom-art {
+    width: 130px;
+    height: 130px;
+  }
+  .result-art {
+    gap: 0;
+  }
+  .rescue-home {
+    min-height: 670px;
+  }
+  .rescue-home-copy {
+    width: 100%;
+    padding-top: 10px;
+  }
+  .rescue-home h2 {
+    font-size: 35px;
+  }
+  .rescue-hero-art {
+    top: 275px;
+    width: 100%;
+  }
+  .rescue-hero-art .art-hamster {
+    width: 220px;
+    height: 220px;
+    right: 100px;
+  }
+  .rescue-hero-art .venom-jellyboss {
+    width: 180px;
+    height: 180px;
+    top: 150px;
+    right: 0;
+  }
+  .rescue-home-floor .rescue-art {
+    width: 95px;
+    height: 95px;
+  }
+  .auth-intro {
+    min-height: 220px;
+  }
+  .auth-captain {
+    width: 185px;
+    height: 185px;
+    right: -10px;
+    bottom: -20px;
+  }
+  .auth-intro h1 {
+    font-size: 32px;
+    max-width: 65%;
+  }
+  .reef-patch {
+    width: 75px;
+    height: 75px;
+  }
+  .patch-5 {
+    left: 76%;
+  }
+}
+@media (max-height: 650px) {
+  .survival-game {
+    height: calc(100dvh - 90px);
+    min-height: 265px;
+    grid-template-rows: 45px 20px minmax(85px, 1fr) 21px auto 42px;
+  }
+  .survival-hud > div:first-child > strong {
+    font-size: 10px;
+  }
+  #survival-lives {
+    font-size: 20px;
+  }
+  .survival-clock > strong {
+    font-size: 20px;
+  }
+  .survival-answers {
+    flex-wrap: nowrap;
+    gap: 4px;
+  }
+  .survival-answers .rescue-button {
+    width: 8%;
+    min-width: 0;
+    min-height: 30px;
+    padding: 4px;
+  }
+  .survival-player {
+    width: 55px;
+    height: 55px;
+  }
+  .survival-enemy {
+    width: 80px;
+    height: 80px;
+  }
+  .survival-controls {
+    padding: 1px;
+  }
+  .swim-pad button {
+    height: 33px;
+  }
+  .fire-button {
+    min-height: 33px;
+    padding: 5px 15px;
+  }
+  .scenery {
+    width: 50px;
+    height: 50px;
+  }
+  .s-count-fish {
+    width: 32px;
+  }
+  .survival-message {
+    font-size: 10px;
+  }
+}
+
+/* Five depths share one moving ocean. Character pictures use one sprite sheet. */
+.crew-art,
+.seahorse-art {
+  display: inline-block;
+  background-repeat: no-repeat;
+  flex-shrink: 0;
+  filter: drop-shadow(0 8px 6px #08133166);
+}
+.crew-art {
+  background-image: url("./assets/rescue/crew.png");
+  background-size: 200% 200%;
+  width: 160px;
+  height: 160px;
+}
+.crew-turtle {
+  background-position: 0 0;
+}
+.crew-fish {
+  background-position: 100% 0;
+}
+.crew-mermaid {
+  background-position: 0 100%;
+}
+.crew-puffer {
+  background-position: 100% 100%;
+}
+.seahorse-art {
+  background-image: url("./assets/rescue/seahorse.png");
+  background-size: contain;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+}
+.crew-choices {
+  display: flex;
+  justify-content: center;
+  gap: clamp(8px, 3vw, 40px);
+  flex-wrap: wrap;
+  margin: 18px auto;
+}
+.crew-choice {
+  border: 0;
+  background: transparent;
+  color: #eafaff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 40%;
+  padding: 8px;
+  transition: transform 0.2s;
+}
+.crew-choice strong {
+  font-size: 20px;
+}
+.crew-choice small {
+  color: #b7c8ed;
+}
+.crew-choice[aria-pressed="true"] {
+  background: radial-gradient(ellipse, #8ff1d638, transparent 70%);
+  transform: translateY(-6px);
+}
+.crew-choice[aria-pressed="true"] strong {
+  color: #8ff1d6;
+}
+.crew-choice:focus-visible {
+  outline: 3px solid #8ff1d6;
+}
+.survival-player > .crew-art {
+  width: 100%;
+  height: 100%;
+}
+.survival-player .shield-bubble {
+  position: absolute;
+  inset: -20%;
+  border: 3px solid #92fff1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 20%,
+    #ffffff66,
+    transparent 45%,
+    #8ceaff33
+  );
+  box-shadow:
+    0 0 22px #80ffdf,
+    inset 0 0 20px #8affdd;
+  display: none;
+  pointer-events: none;
+}
+.survival-player.shielded .shield-bubble {
+  display: block;
+  animation: shield-glow 1s ease-in-out infinite alternate;
+}
+@keyframes shield-glow {
+  to {
+    box-shadow:
+      0 0 35px #ad9aff,
+      inset 0 0 25px #8affdd;
+  }
+}
+.booster-button {
+  border: 0;
+  border-radius: 22px;
+  background: linear-gradient(#dcd1ff, #b8a0ee);
+  color: #172047;
+  font: 900 13px Nunito;
+  min-height: 44px;
+  padding: 8px 16px;
+  box-shadow: 0 5px #101b3d;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.booster-button:disabled {
+  opacity: 0.65;
+}
+.hazard-item {
+  filter: drop-shadow(0 0 5px #b0ff54);
+}
+.region-3 {
+  background: radial-gradient(ellipse at bottom, #38345977, transparent 75%);
+}
+.region-4 {
+  background: radial-gradient(ellipse at bottom, #16142fbb, transparent 75%);
+}
+.close-boost {
+  min-width: 32px !important;
+  width: 32px !important;
+}
+@media (max-width: 600px) {
+  .crew-choice .crew-art {
+    width: clamp(80px, 25vw, 130px);
+    height: clamp(80px, 25vw, 130px);
+  }
+  .crew-choice {
+    padding: 0;
+  }
+  .crew-choice strong {
+    font-size: 15px;
+  }
+  .crew-choices {
+    gap: 3px;
+  }
+  .survival-controls {
+    gap: 5px;
+  }
+  .booster-button {
+    font-size: 10px;
+    padding: 5px 8px;
+  }
+  .fire-button {
+    font-size: 12px;
+    padding: 7px 12px;
+  }
+  .swim-pad {
+    gap: 3px;
+  }
+  .swim-pad button {
+    width: 30px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .survival-player.shielded .shield-bubble {
+    animation: none;
+  }
+}
+
+.object-item > .crew-art,
+.object-item > .seahorse-art {
+  width: 100%;
+  height: 100%;
+}
+
+/* Primary weapon stays centred; boosters float in the ocean. */
+.survival-controls {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+}
+.survival-controls .swim-pad {
+  justify-self: start;
+}
+.survival-controls .fire-button {
+  grid-column: 2;
+  justify-self: center;
+  min-width: 130px;
+}
+.survival-player {
+  width: clamp(120px, 12vw, 165px);
+  height: clamp(120px, 12vw, 165px);
+}
+.floating-shield {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #9cffee;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 20%, #ffffff99, #a995ff44);
+  box-shadow: 0 0 18px #90ffe0;
+  font-size: 32px;
+}
+.floating-shield small {
+  position: absolute;
+  bottom: -7px;
+  right: -3px;
+  font-size: 19px;
+}
+@media (max-width: 600px) {
+  .survival-player {
+    width: 110px;
+    height: 110px;
+  }
+  .survival-controls {
+    grid-template-columns: 1fr auto 1fr;
+  }
+  .survival-controls .fire-button {
+    min-width: 95px;
+  }
+  .swim-pad button {
+    width: 26px;
+  }
+  .swim-pad {
+    gap: 2px;
+  }
+}
+@media (max-height: 650px) {
+  .survival-player {
+    width: 85px;
+    height: 85px;
+  }
+}
+/* Keep the weapon exactly centred without overlapping small-screen movement keys. */
+.survival-controls {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+}
+@media (max-width: 420px) {
+  .survival-controls {
+    grid-template-columns: 1fr;
+    grid-template-rows: 42px 42px;
+    justify-items: center;
+    gap: 3px;
+  }
+  .survival-controls .swim-pad {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: center;
+  }
+  .survival-controls .fire-button {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 140px;
+  }
+  .survival-controls .swim-pad button {
+    width: 42px;
+    height: 38px;
+  }
+  .survival-game {
+    grid-template-rows: 60px 24px minmax(120px, 1fr) 25px auto 90px;
+    min-height: 400px;
+  }
+}
+
+/* Workshop: one consumable loadout for the next dive. */
+.workshop {
+  max-width: 1050px;
+  margin: auto;
+  text-align: center;
+  padding: 12px 0 30px;
+}
+.workshop header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  text-align: left;
+}
+.workshop h1 {
+  font-size: clamp(25px, 3vw, 40px);
+  margin: 5px 0;
+}
+.workshop-wallet {
+  color: #8ff2d7;
+  font-size: 24px;
+  white-space: nowrap;
+}
+.workshop-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  min-height: 170px;
+  background: radial-gradient(ellipse, #8ff2d721, transparent 65%);
+}
+.workshop-preview > .crew-art {
+  width: 180px;
+  height: 180px;
+}
+.workshop-loadout {
+  color: #bfffe8;
+  font-size: 18px;
+  font-weight: 900;
+}
+.workshop-tools {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+.workshop-tool {
+  padding: 12px 5px;
+  background: radial-gradient(ellipse at top, #aaa0ff18, transparent 75%);
+  border-radius: 40px;
+}
+.workshop-icon {
+  display: grid;
+  place-items: center;
+  font-size: 44px;
+  width: 90px;
+  height: 90px;
+  margin: auto;
+  background: radial-gradient(
+    circle at 30% 20%,
+    #edfff84d,
+    #9ff4df15 60%,
+    transparent 65%
+  );
+  filter: drop-shadow(0 8px 5px #07162b99);
+}
+.workshop-tool h2 {
+  font-size: 18px;
+  margin: 8px 0;
+}
+.workshop-tool p {
+  font-size: 13px;
+  min-height: 40px;
+  color: #b6c5e6;
+}
+.workshop-tool .rescue-button {
+  font-size: 12px;
+  padding: 10px 15px;
+}
+.workshop-tool.packed {
+  background: radial-gradient(ellipse, #7ef8d42b, transparent 75%);
+}
+.workshop-trigger {
+  position: absolute;
+  right: 10px;
+  bottom: 12px;
+  z-index: 12;
+  border: 2px solid #a9ffe5;
+  border-radius: 24px;
+  background: linear-gradient(#d7c5ff, #a6ffe5);
+  color: #132447;
+  box-shadow: 0 5px 0 #101a39;
+  font: 900 12px Nunito;
+  padding: 12px;
+  max-width: 58%;
+  cursor: pointer;
+}
+.workshop-trigger:disabled {
+  opacity: 0.65;
+  cursor: default;
+}
+.workshop-trigger[hidden] {
+  display: none;
+}
+.workshop-accessory {
+  position: absolute;
+  right: 8%;
+  bottom: 8%;
+  font-size: clamp(18px, 2vw, 28px);
+  filter: drop-shadow(0 0 5px #93ffe3);
+  pointer-events: none;
+}
+.magnet-active {
+  filter: drop-shadow(0 0 16px #ffb1eb);
+}
+.slow-venom .object-poison {
+  filter: drop-shadow(0 0 8px #a9efff);
+}
+@media (max-width: 700px) {
+  .workshop-tools {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .workshop-preview > .crew-art {
+    width: 130px;
+    height: 130px;
+  }
+  .workshop-loadout {
+    font-size: 14px;
+  }
+  .workshop-preview {
+    min-height: 140px;
+    gap: 5px;
+  }
+  .workshop header {
+    gap: 10px;
+  }
+  .workshop-wallet {
+    font-size: 18px;
+  }
+  .workshop-trigger {
+    font-size: 10px;
+    padding: 8px;
+  }
+  .workshop-tool p {
+    min-height: 36px;
+  }
+}
+.workshop-icon {
+  border-radius: 50%;
+}
+@media (max-width: 600px) {
+  .rescue-layout .account-chip {
+    max-width: 43%;
+    min-width: 0;
+    flex-shrink: 1;
+  }
+  .rescue-layout .account-chip > span:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+/* Transparent equipment art replaces the placeholder symbols. */
+.workshop-icon {
+  width: clamp(120px, 13vw, 165px);
+  height: clamp(120px, 13vw, 165px);
+  background: none;
+  border-radius: 0;
+  filter: none;
+}
+.workshop-pack-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 9px 7px #08142e66);
+  pointer-events: none;
+}
+.workshop-icon .workshop-pack-image {
+  animation: workshop-float 4s ease-in-out infinite;
+}
+.workshop-tool:nth-child(even) .workshop-pack-image {
+  animation-delay: -2s;
+}
+.workshop-tool:hover .workshop-pack-image {
+  filter: drop-shadow(0 0 14px #9ffbe988);
+}
+.workshop-loadout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.workshop-thumbnail {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 3px 3px #08142e66);
+}
+.workshop-trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+}
+.workshop-accessory {
+  width: clamp(26px, 3.5vw, 44px);
+  height: clamp(26px, 3.5vw, 44px);
+  filter: none;
+}
+@keyframes workshop-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-6px) rotate(2deg);
+  }
+}
+@media (max-width: 700px) {
+  .workshop-icon {
+    width: 120px;
+    height: 120px;
+  }
+  .workshop-loadout {
+    gap: 3px;
+    flex-wrap: wrap;
+    max-width: 55%;
+  }
+  .workshop-trigger .workshop-thumbnail {
+    width: 28px;
+    height: 28px;
+  }
+}
+.reduced-motion .workshop-pack-image {
+  animation: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .workshop-pack-image {
+    animation: none !important;
+  }
+}
+/* Dive records and shared captain rankings use the same ocean palette. */
+.dive-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 0 0 28px;
+}
+.dive-stats article {
+  position: relative;
+  overflow: hidden;
+  padding: 22px 26px;
+  border: 1px solid #9deed82e;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #34596899, #273459);
+  box-shadow:
+    0 9px 0 #101a3633,
+    inset 0 1px #ffffff12;
+}
+.dive-stats article:nth-child(2) {
+  background: linear-gradient(135deg, #534678aa, #273459);
+}
+.dive-stats article:nth-child(3) {
+  background: linear-gradient(135deg, #71546e99, #273459);
+}
+.dive-stats article:after {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 18px solid #ffffff06;
+  right: -20px;
+  top: -25px;
+}
+.dive-stats article > span {
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  color: #b8d8e6;
+}
+.dive-stats strong {
+  display: block;
+  font-size: 42px;
+  line-height: 1.3;
+  color: #9af5dd;
+  margin-top: 7px;
+}
+.dive-stats small {
+  font-size: 12px;
+  color: #b2c3dd;
+  margin-left: 9px;
+}
+.dive-dashboard {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(300px, 1fr);
+  gap: 24px;
+  align-items: start;
+  margin-bottom: 40px;
+}
+.dive-journal,
+.ocean-ranking {
+  border: 1px solid #b3c7ff29;
+  border-radius: 30px;
+  background: linear-gradient(145deg, #293a5ee6, #202a4ae6);
+  overflow: hidden;
+  box-shadow: 0 18px 35px #0c15352b;
+}
+.dive-journal > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 26px 28px 14px;
+}
+.dive-journal h2,
+.ocean-ranking h2 {
+  font-size: 25px;
+  margin: 5px 0;
+}
+.dive-count {
+  background: #8ff0d514;
+  padding: 7px 12px;
+  border-radius: 20px;
+  color: #92ebd8;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.dive-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.dive-table th {
+  text-align: left;
+  font-size: 11px;
+  letter-spacing: 1.4px;
+  color: #a9badd;
+  padding: 12px 25px;
+}
+.dive-table td {
+  padding: 18px 25px;
+  border-top: 1px solid #aac5fa14;
+}
+.dive-table td:first-child {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  font-weight: 900;
+}
+.dive-table small {
+  display: block;
+  color: #a4b6d5;
+  font-size: 11px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+.dive-table .dive-score {
+  color: #9af5dd;
+  font-size: 24px;
+  font-weight: 900;
+  text-align: right;
+}
+.dive-table th:last-child {
+  text-align: right;
+}
+.dive-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 15px;
+  background: #c6b1ff1a;
+  color: #cdb8ff;
+  font-size: 23px;
+}
+.dive-badge.won {
+  background: #92f1d61c;
+  color: #92f1d6;
+}
+.ocean-ranking > header {
+  text-align: center;
+  padding: 25px 18px 18px;
+  background: radial-gradient(ellipse at top, #c1a0ff26, transparent 80%);
+}
+.trophy-orb {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 13px;
+  border-radius: 22px;
+  color: #ffe29b;
+  font-size: 44px;
+  background: linear-gradient(135deg, #f9d67a25, #ac88ff22);
+  box-shadow:
+    0 7px 0 #101b3733,
+    inset 0 1px #ffeec84d;
+}
+.ocean-ranking p {
+  font-size: 12px;
+  color: #aebfdd;
+  margin: 5px 0;
+}
+.rank-list {
+  padding: 0 18px;
+  margin: 0;
+  list-style: none;
+}
+.rank-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 10px;
+  border-bottom: 1px solid #bbd3ff14;
+  border-radius: 13px;
+}
+.rank-you {
+  background: #8ff0d514;
+  outline: 1px solid #8ff0d538;
+}
+.rank-medal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #a6b5dd12;
+  color: #aebfdd;
+  font-weight: 900;
+  flex-shrink: 0;
+}
+.medal-1 {
+  background: linear-gradient(145deg, #ffeac3, #eeb954);
+  color: #745016;
+  box-shadow: 0 3px #b38a3f;
+}
+.medal-2 {
+  background: linear-gradient(145deg, #eff7ff, #97abc8);
+  color: #465675;
+}
+.medal-3 {
+  background: linear-gradient(145deg, #ffdabd, #c28b73);
+  color: #724b3c;
+}
+.rank-name {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-weight: 900;
+}
+.rank-name small {
+  font-size: 9px;
+  background: #8ff0d5;
+  color: #183442;
+  border-radius: 6px;
+  padding: 2px 5px;
+  margin-left: 7px;
+}
+.rank-row > strong {
+  color: #eee6ff;
+  font-size: 21px;
+  white-space: nowrap;
+}
+.rank-row > strong small {
+  display: block;
+  font-size: 9px;
+  color: #aebfdd;
+  text-align: right;
+}
+.ranking-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+}
+.ranking-footer > span {
+  font-size: 10px;
+  color: #9eb2d4;
+}
+.ranking-footer button {
+  font-size: 11px;
+  min-height: 33px;
+  padding: 8px 14px;
+}
+.ocean-ranking .ranking-message {
+  padding: 30px 24px;
+  text-align: center;
+}
+@media (max-width: 1000px) {
+  .dive-dashboard {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ocean-ranking {
+    grid-row: 1;
+  }
+  .dive-stats article {
+    padding: 17px;
+  }
+  .dive-stats strong {
+    font-size: 32px;
+  }
+  .dive-stats small {
+    display: block;
+    margin: 0;
+  }
+  .dive-stats article > span {
+    font-size: 9px;
+  }
+}
+@media (max-width: 500px) {
+  .dive-stats {
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .dive-stats article {
+    padding: 14px 10px;
+    border-radius: 18px;
+  }
+  .dive-stats strong {
+    font-size: 28px;
+  }
+  .dive-stats article > span {
+    font-size: 8px;
+    letter-spacing: 0.5px;
+  }
+  .dive-stats small {
+    font-size: 9px;
+  }
+  .dive-journal > header {
+    padding: 20px;
+  }
+  .dive-table th,
+  .dive-table td {
+    padding: 14px;
+  }
+  .dive-table td:first-child {
+    font-size: 12px;
+  }
+  .dive-dashboard {
+    gap: 18px;
+  }
+  .rank-list {
+    padding: 0 12px;
+  }
+  .dive-journal,
+  .ocean-ranking {
+    border-radius: 24px;
+  }
+}
+
+/* Original captain artwork uses crew.png. */
+
+.result-art > .crew-art {
+  width: 220px;
+  height: 220px;
+}
+@media (max-width: 600px) {
+  .result-art > .crew-art {
+    width: 170px;
+    height: 170px;
+  }
+}
+/* Main combat characters stay larger and clearer than collectible items. */
+.survival-player {
+  width: clamp(155px, 15vw, 210px);
+  height: clamp(155px, 15vw, 210px);
+}
+.survival-enemy {
+  width: clamp(170px, 17vw, 225px);
+  height: clamp(170px, 17vw, 225px);
+}
+@media (max-width: 600px) {
+  .survival-player {
+    width: 135px;
+    height: 135px;
+  }
+  .survival-enemy {
+    width: 150px;
+    height: 150px;
+  }
+}
+@media (max-height: 650px) {
+  .survival-player {
+    width: clamp(115px, 23vh, 150px);
+    height: clamp(115px, 23vh, 150px);
+  }
+  .survival-enemy {
+    width: clamp(130px, 27vh, 175px);
+    height: clamp(130px, 27vh, 175px);
+  }
+}
+/* Responsive layout shared by every game screen. */
+html {
+  scroll-padding-bottom: 100px;
+}
+main,
+#rescue-root,
+.auth-layout > *,
+.dive-dashboard > *,
+.workshop-tools > * {
+  min-width: 0;
+}
+img,
+svg,
+canvas {
+  max-width: 100%;
+}
+h1 {
+  font-size: clamp(27px, 3.5vw, 48px);
+}
+h2 {
+  font-size: clamp(21px, 2.4vw, 30px);
+}
+.page-heading {
+  margin-block: clamp(8px, 2vh, 24px) clamp(20px, 3vh, 32px);
+}
+.topbar {
+  gap: 12px;
+}
+.account-chip {
+  min-width: 0;
+  max-width: 45%;
+}
+.account-chip > span:first-child {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.button-row,
+.rescue-actions {
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.auth-layout {
+  min-height: 0;
+  gap: clamp(20px, 4vw, 55px);
+  padding-block: clamp(12px, 4vh, 40px);
+  grid-template-columns: minmax(0, 1.2fr) minmax(280px, 1fr);
+}
+.auth-intro {
+  min-height: clamp(260px, 55vh, 550px);
+}
+.auth-intro h1 {
+  font-size: clamp(34px, 5vw, 70px);
+}
+.auth-card {
+  width: 100%;
+  max-width: 520px;
+  justify-self: center;
+  padding: clamp(22px, 3vw, 40px);
+}
+.auth-card input {
+  width: 100%;
+  min-width: 0;
+}
+.auth-captain {
+  width: clamp(170px, 24vw, 300px);
+  height: clamp(170px, 24vw, 300px);
+}
+.survival-intro,
+.survival-results {
+  padding: clamp(6px, 2vh, 24px) 0 20px;
+}
+.crew-choices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(3px, 2vw, 28px);
+  max-width: 760px;
+  width: 100%;
+  margin: clamp(10px, 3vh, 30px) auto;
+}
+.crew-choice {
+  min-width: 0;
+  padding: 4px;
+}
+.crew-choice .crew-art {
+  width: clamp(78px, 17vw, 190px);
+  height: clamp(78px, 17vw, 190px);
+  max-width: 100%;
+}
+.crew-choice strong {
+  font-size: clamp(13px, 1.8vw, 20px);
+}
+.intro-rules {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(6px, 2vw, 30px);
+  font-size: clamp(16px, 2.2vw, 25px);
+  max-width: 850px;
+  margin: 0 auto;
+}
+.intro-rules small {
+  font-size: clamp(10px, 1.1vw, 13px);
+}
+.workshop header {
+  flex-wrap: wrap;
+}
+.workshop-preview {
+  flex-wrap: wrap;
+  min-height: 0;
+  padding: 12px 0;
+}
+.workshop-loadout {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.workshop-tools {
+  grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr));
+  gap: clamp(10px, 2vw, 22px);
+}
+.workshop-tool {
+  min-width: 0;
+}
+.workshop-tool p {
+  min-height: 0;
+}
+.workshop-tool .rescue-button {
+  max-width: 100%;
+}
+.setting-row {
+  gap: 15px;
+}
+.setting-row > div {
+  min-width: 0;
+}
+.setting-row .toggle,
+.setting-row > .pearl-button {
+  flex-shrink: 0;
+}
+.settings-panel,
+.guide-panel {
+  padding: clamp(20px, 3vw, 38px);
+}
+.result-art {
+  gap: clamp(0px, 3vw, 50px);
+}
+.result-art > .crew-art {
+  width: clamp(100px, 22vw, 220px);
+  height: clamp(100px, 22vw, 220px);
+}
+.survival-summary {
+  flex-wrap: wrap;
+}
+.survival-game {
+  height: calc(100dvh - var(--game-top, 108px) - 10px);
+  min-height: 290px;
+  max-height: none;
+  grid-template-rows:
+    clamp(42px, 8dvh, 65px) auto minmax(100px, 1fr) minmax(20px, auto)
+    auto auto;
+  gap: 4px;
+}
+.survival-stage {
+  container-type: size;
+}
+.survival-goals {
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  padding-block: 2px;
+}
+.survival-message {
+  min-height: 20px;
+}
+.survival-answers {
+  min-height: 0;
+}
+.survival-controls {
+  min-height: 42px;
+}
+.survival-player {
+  width: clamp(88px, min(10vw, 18dvh), 132px);
+  height: clamp(88px, min(10vw, 18dvh), 132px);
+}
+.survival-enemy {
+  width: clamp(110px, min(18vw, 75cqh), 225px);
+  height: clamp(110px, min(18vw, 75cqh), 225px);
+}
+@media (max-width: 1000px) {
+  .rescue-home {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 85px;
+  }
+  .rescue-home-copy {
+    width: 100%;
+    padding: 12px 0;
+    text-align: center;
+  }
+  .rescue-home .button-row {
+    justify-content: center;
+  }
+  .rescue-hero-art {
+    position: relative;
+    align-self: center;
+    width: min(100%, 520px);
+    height: clamp(230px, 36vw, 340px);
+  }
+  .rescue-hero-art .art-hamster {
+    width: clamp(170px, 28vw, 270px);
+    height: clamp(170px, 28vw, 270px);
+    left: 3%;
+    right: auto;
+    top: 0;
+  }
+  .rescue-hero-art .venom-jellyboss {
+    width: clamp(150px, 25vw, 230px);
+    height: clamp(150px, 25vw, 230px);
+    right: 4%;
+    top: 80px;
+  }
+}
+@media (max-width: 900px) {
+  .auth-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .auth-intro {
+    min-height: 210px;
+    padding: 12px 0;
+  }
+  .auth-intro h1 {
+    max-width: 65%;
+    font-size: clamp(32px, 5vw, 50px);
+    margin-top: 16px;
+  }
+  .auth-intro p {
+    max-width: 60%;
+  }
+  .auth-captain {
+    right: 0;
+    bottom: 0;
+    width: clamp(150px, 29vw, 230px);
+    height: clamp(150px, 29vw, 230px);
+  }
+}
+@media (min-width: 768px) and (max-height: 700px) {
+  .nav-rail {
+    top: 12px;
+    bottom: 12px;
+    padding: 12px 8px;
+  }
+  .nav-rail .monogram {
+    font-size: 32px;
+  }
+  .nav-rail nav {
+    margin-top: 18px;
+    gap: 12px;
+  }
+  .nav-rail .nav-button {
+    min-height: 36px;
+    height: 36px;
+    border-radius: 14px;
+    font-size: 12px;
+  }
+  .app-shell:not(.auth-shell) {
+    padding-top: 12px;
+  }
+  .topbar {
+    height: 50px;
+  }
+  .rescue-layout .back-to-play {
+    display: none;
+  }
+}
+@media (max-width: 767px) {
+  .app-shell {
+    padding: 14px clamp(12px, 4vw, 24px) 105px;
+  }
+  .auth-shell {
+    padding: 14px clamp(14px, 5vw, 32px) 25px;
+  }
+  .rescue-layout .app-shell {
+    padding: 12px clamp(10px, 3vw, 24px) 6px;
+  }
+  .topbar {
+    height: 50px;
+  }
+  .wordmark {
+    font-size: clamp(19px, 5vw, 24px);
+  }
+  .account-chip {
+    font-size: 12px;
+  }
+  .topbar-tag {
+    font-size: 10px;
+    letter-spacing: 1px;
+  }
+  .survival-intro h1 {
+    font-size: clamp(25px, 5.5vw, 36px);
+  }
+  .rescue-button {
+    font-size: clamp(12px, 3vw, 16px);
+    padding: 11px 17px;
+  }
+  .intro-rules {
+    font-size: 16px;
+  }
+  .survival-intro > p {
+    font-size: 12px;
+  }
+  .workshop-tools {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .workshop-wallet {
+    font-size: 20px;
+  }
+  .workshop-preview > .crew-art {
+    width: 130px;
+    height: 130px;
+  }
+  .workshop-tool h2 {
+    font-size: 16px;
+  }
+  .workshop-tool p {
+    font-size: 12px;
+  }
+  .survival-game {
+    min-height: 290px;
+  }
+  .survival-hud {
+    gap: 5px;
+  }
+  .survival-goals {
+    font-size: 10px;
+  }
+  .survival-player {
+    width: clamp(78px, 24vw, 100px);
+    height: clamp(78px, 24vw, 100px);
+  }
+  .survival-enemy {
+    width: clamp(115px, 65cqh, 150px);
+    height: clamp(115px, 65cqh, 150px);
+  }
+}
+@media (max-width: 420px) {
+  .survival-controls {
+    grid-template-rows: 38px 38px;
+    min-height: 80px;
+  }
+  .survival-controls .fire-button {
+    min-height: 34px;
+  }
+  .swim-pad button {
+    height: 34px;
+  }
+  .survival-resources {
+    font-size: 10px;
+  }
+  .survival-hud > div:first-child > strong {
+    max-width: 100px;
+  }
+  .setting-row {
+    flex-wrap: wrap;
+  }
+  .setting-row > div {
+    flex: 1 1 155px;
+  }
+  .setting-row .toggle {
+    margin-left: auto;
+  }
+  .guide-step {
+    gap: 12px;
+  }
+  .rank-row {
+    gap: 8px;
+  }
+  .rank-name {
+    font-size: 13px;
+  }
+}
+@media (max-height: 500px) {
+  .survival-game {
+    min-height: 230px;
+    grid-template-rows: 40px auto minmax(75px, 1fr) 17px auto 38px;
+    gap: 1px;
+  }
+  .survival-goals {
+    font-size: 10px;
+  }
+  .survival-message {
+    font-size: 10px;
+    min-height: 17px;
+  }
+  .survival-clock > strong {
+    font-size: 20px;
+  }
+  .survival-player {
+    width: clamp(64px, min(9vw, 18dvh), 88px);
+    height: clamp(64px, min(9vw, 18dvh), 88px);
+  }
+  .survival-enemy {
+    width: clamp(100px, 70cqh, 140px);
+    height: clamp(100px, 70cqh, 140px);
+  }
+  .survival-controls .fire-button {
+    min-height: 32px;
+  }
+  .survival-answers .rescue-button {
+    min-height: 28px;
+    padding: 3px;
+  }
+  .survival-answers {
+    gap: 3px;
+  }
+}
+/* Entire screens fit the window instead of relying on page scrolling. */
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+.app-shell {
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+}
+main {
+  transform-origin: top center;
+}
+main > footer {
+  display: none;
+}
+.auth-layout {
+  padding-block: 6px;
+}
+.auth-card {
+  padding: 22px 28px;
+}
+.auth-card .pearl-mark {
+  font-size: 26px;
+  margin-bottom: 4px;
+}
+.auth-card h2 {
+  font-size: 26px;
+  margin-bottom: 5px;
+}
+.auth-card label {
+  margin: 12px 0 6px;
+}
+.auth-card input:not([type="range"]) {
+  min-height: 44px;
+  padding: 10px 14px;
+}
+.auth-card .pearl-button {
+  min-height: 44px;
+  font-size: 16px;
+  padding: 10px 18px;
+}
+.auth-card > .pearl-button {
+  margin-top: 12px;
+}
+.auth-card .form-error {
+  min-height: 16px;
+  margin: 7px 0;
+}
+.page-heading {
+  margin: 4px 0 18px;
+}
+.page-heading h1 {
+  font-size: clamp(26px, 3vw, 40px);
+}
+.back-to-play {
+  margin-bottom: 12px;
+}
+.rescue-home {
+  min-height: 420px;
+}
+.rescue-home-copy {
+  padding-top: 15px;
+}
+.rescue-home h2 {
+  font-size: clamp(30px, 3.6vw, 48px);
+}
+.setting-row {
+  padding: 17px 0;
+}
+.setting-row h2 {
+  font-size: 21px;
+}
+.setting-row p {
+  font-size: 13px;
+  margin-top: 5px;
+}
+.setting-row .pearl-button {
+  min-height: 42px;
+  min-width: 125px;
+  font-size: 13px;
+  padding: 10px 18px;
+}
+.settings-panel,
+.guide-panel {
+  padding: 18px 26px;
+}
+.guide-step {
+  margin-bottom: 18px;
+}
+.guide-step h2 {
+  font-size: 22px;
+}
+.guide-step p {
+  font-size: 15px;
+  margin-top: 5px;
+}
+.dive-stats {
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.dive-stats article {
+  padding: 16px 22px;
+}
+.dive-stats strong {
+  font-size: 34px;
+}
+.dive-dashboard {
+  gap: 18px;
+  margin-bottom: 0;
+}
+.dive-journal > header {
+  padding: 18px 24px 10px;
+}
+.dive-table td {
+  padding: 12px 22px;
+}
+.dive-table th {
+  padding: 9px 22px;
+}
+.rank-row {
+  padding: 9px 10px;
+}
+.ocean-ranking > header {
+  padding: 15px 14px 10px;
+}
+.trophy-orb {
+  width: 46px;
+  height: 46px;
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+.ranking-footer {
+  padding: 12px 18px;
+}
+.workshop {
+  padding-bottom: 10px;
+}
+.workshop-preview > .crew-art {
+  width: 130px;
+  height: 130px;
+}
+.workshop-preview {
+  padding: 0;
+}
+.workshop-tool {
+  padding: 6px 4px;
+}
+.workshop-icon {
+  width: 70px;
+  height: 70px;
+}
+.workshop-tool h2 {
+  margin: 5px 0;
+}
+.workshop-tool p {
+  font-size: 12px;
+  margin-block: 5px;
+}
+.workshop .small {
+  margin-block: 8px;
+}
+.workshop > .rescue-actions {
+  margin-top: 8px;
+}
+@media (max-width: 1000px) {
+  .rescue-home {
+    padding-bottom: 50px;
+    min-height: 0;
+  }
+  .rescue-hero-art {
+    height: 230px;
+  }
+  .rescue-home-copy {
+    padding: 4px 0;
+  }
+  .rescue-home .button-row {
+    margin: 18px 0;
+  }
+  .auth-intro {
+    min-height: 170px;
+  }
+  .auth-intro h1 {
+    font-size: 36px;
+  }
+  .auth-captain {
+    width: 160px;
+    height: 160px;
+  }
+  .dive-dashboard {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .ocean-ranking {
+    grid-row: auto;
+  }
+  .dive-stats small {
+    font-size: 10px;
+  }
+  .rank-name {
+    font-size: 13px;
+  }
+  .rank-row {
+    gap: 7px;
+  }
+  .rank-medal {
+    width: 27px;
+    height: 27px;
+  }
+  .rank-row > strong {
+    font-size: 18px;
+  }
+  .ocean-ranking h2 {
+    font-size: 21px;
+  }
+  .dive-table td:first-child {
+    font-size: 12px;
+  }
+  .dive-badge {
+    width: 32px;
+    height: 32px;
+  }
+}
+@media (max-width: 600px) {
+  .dive-dashboard {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ocean-ranking {
+    grid-row: 1;
+  }
+  .dive-stats article {
+    padding: 12px 9px;
+  }
+  .dive-stats strong {
+    font-size: 27px;
+  }
+  .dive-stats article > span {
+    font-size: 8px;
+  }
+  .dive-stats {
+    gap: 7px;
+    margin-bottom: 12px;
+  }
+  .dive-table td {
+    padding: 9px 14px;
+  }
+  .dive-journal > header {
+    padding: 14px 18px 8px;
+  }
+  .ocean-ranking > header {
+    padding: 12px 14px 8px;
+  }
+  .rank-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px;
+    padding: 0 10px;
+  }
+  .rank-row {
+    display: grid;
+    grid-template-columns: 26px minmax(0, 1fr);
+    gap: 3px 5px;
+    padding: 7px;
+  }
+  .rank-row > strong {
+    grid-column: 2;
+    font-size: 16px;
+  }
+  .rank-row > strong small {
+    display: inline;
+    margin-left: 4px;
+  }
+  .rank-name {
+    font-size: 11px;
+  }
+  .rank-name small {
+    display: inline-block;
+    margin-left: 3px;
+  }
+  .rank-medal {
+    grid-row: span 2;
+  }
+  .ranking-footer {
+    padding: 9px 12px;
+  }
+  .dive-count {
+    font-size: 10px;
+  }
+  .auth-intro {
+    min-height: 145px;
+  }
+  .auth-intro h1 {
+    font-size: 30px;
+    margin-top: 8px;
+  }
+  .auth-intro p {
+    margin-top: 10px;
+  }
+  .auth-captain {
+    width: 145px;
+    height: 145px;
+  }
+  .auth-card {
+    padding: 18px 22px;
+  }
+  .auth-layout {
+    gap: 10px;
+  }
+  .auth-card > p {
+    font-size: 13px;
+    margin-block: 6px;
+  }
+  .workshop-tool p {
+    font-size: 11px;
+  }
+  .workshop header h1 {
+    font-size: 26px;
+  }
+  .workshop-preview > .crew-art {
+    width: 100px;
+    height: 100px;
+  }
+}
+/* Keep long rankings readable in a compact five-row grid. */
+.rank-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px 8px;
+  padding: 0 12px;
+}
+.rank-row {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 2px 6px;
+  padding: 6px 8px;
+}
+.rank-medal {
+  width: 27px;
+  height: 27px;
+  grid-row: span 2;
+}
+.rank-name {
+  font-size: 12px;
+}
+.rank-row > strong {
+  grid-column: 2;
+  font-size: 17px;
+}
+.rank-row > strong small {
+  display: inline;
+  margin-left: 4px;
+}
+.rank-name small {
+  font-size: 8px;
+  padding: 1px 3px;
+  margin-left: 3px;
+}
+.ocean-ranking > header {
+  padding: 12px 14px 8px;
+}
+.ocean-ranking h2 {
+  font-size: 23px;
+}
+.ocean-ranking .trophy-orb {
+  width: 38px;
+  height: 38px;
+  font-size: 28px;
+  margin-bottom: 6px;
+}
+.ocean-ranking .eyebrow {
+  font-size: 10px;
+  margin-bottom: 6px;
+}
+.ranking-footer {
+  padding: 10px 14px;
+}
+.history-tabs {
+  display: none;
+}
+.topbar {
+  height: 50px;
+}
+.back-to-play {
+  min-height: 32px;
+  padding: 8px 14px;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+.page-heading .eyebrow {
+  font-size: 11px;
+  margin-bottom: 6px;
+}
+.page-heading {
+  margin-bottom: 14px;
+}
+.page-heading h1 {
+  font-size: clamp(26px, 2.8vw, 36px);
+}
+.dive-stats article {
+  padding: 12px 18px;
+}
+.dive-stats strong {
+  font-size: 30px;
+}
+.dive-journal h2 {
+  font-size: 23px;
+}
+.dive-table td {
+  padding: 9px 18px;
+}
+.dive-table .dive-score {
+  font-size: 21px;
+}
+@media (max-width: 600px) {
+  .history-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .history-tabs .pearl-button {
+    min-height: 36px;
+    font-size: 13px;
+    flex: 1;
+    padding: 8px 10px;
+  }
+  .dive-dashboard.show-recent .ocean-ranking {
+    display: none;
+  }
+  .dive-dashboard.show-leaderboard .dive-journal {
+    display: none;
+  }
+  .dive-dashboard {
+    display: block;
+  }
+  .rank-row {
+    padding: 8px;
+  }
+  .rank-name {
+    font-size: 12px;
+  }
+  .dive-stats article {
+    padding: 10px 9px;
+  }
+  .dive-stats strong {
+    font-size: 26px;
+  }
+  .dive-stats small {
+    font-size: 9px;
+  }
+  .dive-table td {
+    padding: 10px 14px;
+  }
+}
+@media (min-width: 650px) and (max-width: 999px) and (max-height: 650px) {
+  .auth-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 24px;
+  }
+  .auth-intro {
+    min-height: 250px;
+  }
+  .auth-intro h1 {
+    max-width: 100%;
+    font-size: 34px;
+  }
+  .auth-captain {
+    width: 150px;
+    height: 150px;
+  }
+  .auth-card {
+    padding: 16px 20px;
+  }
+  .auth-card input:not([type="range"]) {
+    min-height: 38px;
+    padding: 8px 12px;
+  }
+  .auth-card label {
+    margin-top: 8px;
+  }
+  .auth-card h2 {
+    font-size: 22px;
+  }
+  .auth-card .pearl-mark {
+    display: none;
+  }
+  .auth-card .pearl-button {
+    min-height: 36px;
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+}
+/* Short landscape windows use one compact workshop row and a side-by-side home. */
+@media (min-width: 650px) and (max-width: 999px) and (max-height: 650px) {
+  .workshop-tools {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .workshop-preview > .crew-art {
+    display: none;
+  }
+  .workshop-preview {
+    min-height: 0;
+    padding: 4px;
+  }
+  .workshop-preview .workshop-loadout {
+    font-size: 13px;
+  }
+  .workshop h1 {
+    font-size: 26px;
+  }
+  .workshop-icon {
+    width: 55px;
+    height: 55px;
+  }
+  .workshop-tool h2 {
+    font-size: 15px;
+  }
+  .workshop-tool p {
+    font-size: 11px;
+  }
+  .workshop .small {
+    font-size: 10px;
+    line-height: 1.3;
+  }
+  .workshop .rescue-button {
+    min-height: 32px;
+    padding: 7px 12px;
+    font-size: 11px;
+  }
+  .rescue-home {
+    display: block;
+    height: calc(100dvh - 130px);
+    min-height: 220px;
+    padding: 0;
+  }
+  .rescue-home-copy {
+    width: 58%;
+    text-align: left;
+    padding: 0;
+  }
+  .rescue-home h2 {
+    font-size: 30px;
+  }
+  .rescue-home .button-row {
+    justify-content: flex-start;
+    margin: 12px 0;
+  }
+  .rescue-home .pearl-button {
+    min-height: 40px;
+    font-size: 14px;
+    padding: 10px 16px;
+  }
+  .rescue-home p {
+    font-size: 13px;
+  }
+  .rescue-home .home-pearls {
+    font-size: 17px !important;
+  }
+  .rescue-hero-art {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 40%;
+    height: 100%;
+  }
+  .rescue-hero-art .art-hamster {
+    width: 155px;
+    height: 155px;
+    left: 0;
+    top: 0;
+  }
+  .rescue-hero-art .venom-jellyboss {
+    width: 130px;
+    height: 130px;
+    right: 0;
+    top: 100px;
+  }
+  .rescue-home-floor {
+    display: none;
+  }
+}
+
+/* Desktop menus fill the available area at readable sizes, without whole-page scaling. */
+@media (min-width: 1000px) and (min-height: 500px) {
+  .app-shell:not(.auth-shell) {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  main {
+    height: calc(100dvh - 24px);
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .auth-shell main {
+    height: calc(100dvh - 48px);
+  }
+  .topbar {
+    height: 48px;
+    min-height: 48px;
+    flex-shrink: 0;
+  }
+  .wordmark {
+    font-size: 25px;
+  }
+  .account-chip {
+    font-size: 16px;
+  }
+  .back-to-play {
+    align-self: flex-start;
+    min-height: 32px;
+    font-size: 13px;
+    flex-shrink: 0;
+  }
+  .page-heading {
+    flex-shrink: 0;
+    margin: 3px 0 12px;
+  }
+  .page-heading h1 {
+    font-size: clamp(28px, 2.6vw, 38px);
+  }
+  .nav-rail {
+    padding: 14px 8px;
+  }
+  .nav-rail .monogram {
+    font-size: 40px;
+  }
+  .nav-rail nav {
+    margin-top: 25px;
+    gap: 14px;
+  }
+  .nav-rail .nav-button {
+    height: 46px;
+    min-height: 46px;
+    font-size: 15px;
+    border-radius: 17px;
+  }
+  .nav-rail .rail-logout {
+    font-size: 13px;
+  }
+  .rescue-home {
+    flex: 1;
+    min-height: 0;
+    height: auto;
+    padding: 0;
+    display: block;
+  }
+  .rescue-home-copy {
+    height: 100%;
+    width: 52%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    padding: 0 0 25px;
+  }
+  .rescue-home h2 {
+    font-size: clamp(36px, 3.5vw, 52px);
+    line-height: 1.12;
+  }
+  .rescue-home p {
+    font-size: 16px;
+  }
+  .rescue-home .button-row {
+    margin: 20px 0;
+    justify-content: flex-start;
+  }
+  .rescue-home .pearl-button {
+    min-height: 52px;
+    font-size: 18px;
+    padding: 12px 22px;
+  }
+  .rescue-home .home-pearls {
+    font-size: 22px !important;
+  }
+  .rescue-hero-art {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 49%;
+    height: 100%;
+  }
+  .rescue-hero-art .art-hamster {
+    width: clamp(210px, 24vw, 315px);
+    height: clamp(210px, 24vw, 315px);
+    left: 0;
+    right: auto;
+    top: 0;
+  }
+  .rescue-hero-art .venom-jellyboss {
+    width: clamp(175px, 18vw, 250px);
+    height: clamp(175px, 18vw, 250px);
+    right: 0;
+    top: 38%;
+  }
+  .rescue-home-floor {
+    display: none;
+  }
+  .auth-layout {
+    flex: 1;
+    min-height: 0;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    padding: 0;
+    gap: 45px;
+  }
+  .auth-intro {
+    height: 100%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 0 80px;
+  }
+  .auth-intro h1 {
+    font-size: clamp(42px, 4vw, 60px);
+    max-width: 80%;
+    margin-top: 18px;
+  }
+  .auth-intro p {
+    font-size: 18px;
+    margin-top: 20px;
+  }
+  .auth-captain {
+    display: block;
+    width: clamp(210px, 22vw, 300px);
+    height: clamp(210px, 22vw, 300px);
+    right: 0;
+    bottom: 0;
+  }
+  .auth-card {
+    padding: 22px 26px;
+    max-width: 520px;
+  }
+  .auth-card h2 {
+    font-size: 28px;
+  }
+  .auth-card p {
+    font-size: 15px;
+  }
+  .auth-card label {
+    font-size: 15px;
+    margin-top: 12px;
+  }
+  .auth-card input:not([type="range"]) {
+    min-height: 46px;
+    padding: 11px 14px;
+    font-size: 16px;
+  }
+  .auth-card .pearl-button {
+    min-height: 46px;
+    font-size: 17px;
+  }
+  .auth-card:has(#confirm) {
+    padding-block: 16px;
+  }
+  .auth-card:has(#confirm) input {
+    min-height: 40px;
+    padding: 9px 13px;
+  }
+  .auth-card:has(#confirm) label {
+    margin-top: 8px;
+  }
+  .auth-card:has(#confirm) .pearl-button {
+    min-height: 40px;
+  }
+  #rescue-root {
+    flex: 1;
+    width: 100%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .workshop {
+    width: 100%;
+    max-width: 1150px;
+    flex: 1;
+    min-height: 0;
+    margin: 0 auto;
+    display: grid;
+    grid-template-rows: auto minmax(60px, 0.65fr) minmax(165px, 1.4fr) auto auto;
+    gap: 4px;
+    padding: 5px 0 8px;
+  }
+  .workshop header h1 {
+    font-size: clamp(28px, 2.4vw, 36px);
+  }
+  .workshop-wallet {
+    font-size: 27px;
+  }
+  .workshop-preview {
+    min-height: 0;
+    padding: 0;
+  }
+  .workshop-preview > .crew-art {
+    display: block;
+    width: 110px;
+    height: 110px;
+  }
+  .workshop-loadout {
+    font-size: 16px;
+  }
+  .workshop-tools {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    min-height: 0;
+    align-items: center;
+  }
+  .workshop-tool {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+  }
+  .workshop-icon {
+    width: 90px;
+    height: 90px;
+  }
+  .workshop-tool h2 {
+    font-size: 19px;
+    margin: 4px 0;
+  }
+  .workshop-tool p {
+    font-size: 13px;
+    margin: 4px 0;
+    line-height: 1.35;
+    min-height: 35px;
+  }
+  .workshop-tool .rescue-button {
+    font-size: 14px;
+    min-height: 38px;
+    padding: 9px 16px;
+  }
+  .workshop .small {
+    font-size: 12px;
+    line-height: 1.35;
+    margin: 4px 0;
+  }
+  .workshop .rescue-actions {
+    margin: 6px 0;
+    gap: 12px;
+  }
+  .workshop .rescue-actions .rescue-button {
+    min-height: 40px;
+    font-size: 14px;
+  }
+  .workshop #survival-message:empty {
+    display: none;
+  }
+  .settings-panel {
+    flex: 1;
+    min-height: 0;
+    width: min(100%, 1050px);
+    padding: 10px 26px;
+    display: grid;
+    grid-template-rows: repeat(4, minmax(0, 1fr));
+    margin: 0 auto;
+  }
+  .setting-row {
+    padding: 8px 0;
+    min-height: 0;
+  }
+  .setting-row h2 {
+    font-size: 24px;
+  }
+  .setting-row p {
+    font-size: 14px;
+  }
+  .setting-row .pearl-button {
+    min-height: 44px;
+    font-size: 14px;
+  }
+  .guide-panel {
+    flex: 1;
+    min-height: 0;
+  }
+  .dive-stats {
+    margin-bottom: 12px;
+    flex-shrink: 0;
+  }
+  .dive-stats article {
+    padding: 10px 18px;
+  }
+  .dive-stats strong {
+    font-size: 32px;
+  }
+  .dive-dashboard {
+    flex: 1;
+    min-height: 0;
+    gap: 18px;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    align-items: stretch;
+  }
+  .dive-journal {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .dive-journal > header {
+    padding: 10px 20px 7px;
+    flex-shrink: 0;
+  }
+  .dive-journal h2 {
+    font-size: 23px;
+  }
+  .dive-journal .table-wrap {
+    flex: 1;
+    min-height: 0;
+    overflow: visible;
+  }
+  .dive-table {
+    height: 100%;
+  }
+  .dive-table th {
+    padding: 5px 18px;
+    font-size: 10px;
+  }
+  .dive-table td {
+    padding: 4px 18px;
+  }
+  .dive-table td:first-child {
+    font-size: 14px;
+  }
+  .dive-badge {
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+  }
+  .dive-table small {
+    font-size: 11px;
+    margin-top: 2px;
+  }
+  .dive-table .dive-score {
+    font-size: 23px;
+  }
+  .ocean-ranking {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .ocean-ranking > header {
+    padding: 8px 12px 5px;
+  }
+  .ocean-ranking h2 {
+    font-size: 22px;
+    margin: 3px 0;
+  }
+  .ocean-ranking .trophy-orb {
+    width: 28px;
+    height: 28px;
+    font-size: 23px;
+    margin-bottom: 3px;
+  }
+  .ocean-ranking .eyebrow {
+    font-size: 9px;
+    margin-bottom: 3px;
+  }
+  .ocean-ranking p {
+    font-size: 11px;
+    margin: 2px 0;
+  }
+  .rank-list {
+    flex: 1;
+    min-height: 0;
+    grid-auto-rows: minmax(0, 1fr);
+    align-content: start;
+  }
+  .rank-row {
+    padding: 4px 6px;
+    gap: 1px 5px;
+  }
+  .rank-name {
+    font-size: 12px;
+  }
+  .rank-row > strong {
+    font-size: 18px;
+  }
+  .ranking-footer {
+    padding: 6px 12px;
+    flex-shrink: 0;
+  }
+  .ranking-footer button {
+    min-height: 28px;
+    padding: 6px 12px;
+  }
+}
+@media (min-width: 1000px) and (min-height: 500px) {
+  .dive-table td:first-child {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  .dive-table .dive-badge {
+    display: inline-flex;
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+  .dive-table td:first-child > span:last-child {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .dive-table td {
+    vertical-align: middle;
+  }
+  .dive-table tbody tr {
+    height: 20%;
+  }
+  .rank-row {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 28px;
+    padding: 3px 6px;
+  }
+  .rank-medal {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+  .rank-name {
+    flex: 1;
+    min-width: 0;
+    font-size: 12px;
+    line-height: 1.1;
+  }
+  .rank-row > strong {
+    font-size: 18px;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .rank-row > strong small {
+    display: inline;
+    font-size: 8px;
+    margin-left: 3px;
+  }
+  .rank-list {
+    gap: 2px 7px;
+  }
+}
+@media (min-width: 1000px) and (min-height: 500px) and (max-height: 580px) {
+  .survival-intro {
+    padding-top: 0;
+  }
+  .survival-intro h1 {
+    font-size: 30px;
+    margin-block: 8px;
+  }
+  .survival-intro .crew-choices {
+    margin: 9px auto;
+    gap: 14px;
+  }
+  .survival-intro .crew-choice .crew-art {
+    width: 145px;
+    height: 145px;
+  }
+  .survival-intro .intro-rules {
+    font-size: 19px;
+  }
+  .survival-intro .intro-rules small {
+    font-size: 11px;
+  }
+  .survival-intro > p {
+    margin-block: 7px;
+    font-size: 12px;
+  }
+  .survival-intro .rescue-actions {
+    margin-block: 9px;
+  }
+}
+@media (min-width: 1000px) and (min-height: 500px) {
+  .dive-journal > header .eyebrow {
+    font-size: 10px;
+    margin-bottom: 2px;
+  }
+  .dive-journal > header h2 {
+    font-size: 22px;
+    margin: 2px 0;
+  }
+  .dive-journal > header {
+    padding: 9px 18px;
+  }
+  .dive-journal .table-wrap {
+    display: flex;
+    flex-direction: column;
+  }
+  .dive-table {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    height: auto;
+  }
+  .dive-table thead {
+    flex: 0 0 24px;
+  }
+  .dive-table thead tr,
+  .dive-table tbody tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 90px;
+    height: auto;
+    min-height: 0;
+  }
+  .dive-table tbody {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-rows: repeat(5, minmax(0, 1fr));
+  }
+  .dive-table th {
+    padding: 3px 18px;
+  }
+  .dive-table td {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 2px 18px;
+    min-height: 0;
+  }
+  .dive-table td:first-child {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 14px;
+    line-height: 1.1;
+    gap: 0;
+  }
+  .dive-table .dive-badge {
+    width: 26px;
+    height: 26px;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+  .dive-table .dive-score {
+    display: block;
+    font-size: 22px;
+    line-height: 1.05;
+    text-align: right;
+    padding-top: 3px;
+  }
+  .dive-table small {
+    font-size: 10px;
+    line-height: 1.1;
+    margin-top: 2px;
+  }
+  .dive-table .dive-score small {
+    font-size: 9px;
+    margin-top: 1px;
+  }
+}
+@media (min-width: 1000px) and (min-height: 500px) and (max-height: 580px) {
+  .dive-stats article {
+    padding-block: 7px;
+  }
+  .dive-stats strong {
+    font-size: 28px;
+  }
+  .dive-stats small {
+    font-size: 10px;
+  }
+  .page-heading h1 {
+    font-size: 30px;
+  }
+  .dive-table td:first-child {
+    font-size: 13px;
+  }
+  .dive-table td {
+    padding-inline: 14px;
+  }
+  .dive-table .dive-score {
+    font-size: 20px;
+  }
+}

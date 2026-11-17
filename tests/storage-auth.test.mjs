@@ -198,3 +198,68 @@ test("server progress survives empty browser storage and restart, and isolates u
   });
   assert.equal(response.status, 401);
 });
+
+test("expedition progress and reef purchases persist without duplicate rewards", async () => {
+  await auth.signup("RescueCaptain", "reef123", "reef123");
+  await auth.login("RescueCaptain", "reef123");
+  await store.serverAction("rescuecaptain", "captain", { captain: "turtle" });
+  const result = {
+    id: "rescue-one",
+    captain: "turtle",
+    score: 200,
+    rivalScore: 150,
+    correct: 3,
+    completed: true,
+  };
+  await store.serverAction("rescuecaptain", "expedition", { result });
+  await store.serverAction("rescuecaptain", "expedition", { result });
+  assert.equal(store.getUser("rescuecaptain").pearls, 4);
+  await store.serverAction("rescuecaptain", "restore", { spot: 2 });
+  await store.serverAction("rescuecaptain", "restore", { spot: 2 });
+  assert.equal(store.getUser("rescuecaptain").pearls, 2);
+  await assert.rejects(
+    store.serverAction("rescuecaptain", "restore", { spot: -1 }),
+  );
+  globalThis.fetch = service.browser();
+  globalThis.localStorage = memory();
+  globalThis.sessionStorage = memory();
+  await auth.login("RescueCaptain", "reef123");
+  assert.equal(store.getUser("rescuecaptain").rescue.captain, "turtle");
+  assert.deepEqual(store.getUser("rescuecaptain").rescue.restored, [2]);
+  assert.equal(store.getUser("rescuecaptain").rescue.deepest, 2);
+});
+
+test("survival pearls and result persist across browsers and cannot pay twice", async () => {
+  await auth.signup("Survivor", "reef123", "reef123");
+  await auth.login("Survivor", "reef123");
+  const result = {
+    id: "survival-one",
+    score: 170,
+    pearls: 24,
+    lives: 1,
+    level: 4,
+    correct: 3,
+    stuns: 2,
+    completed: true,
+  };
+  await store.serverAction("survivor", "survival", { result });
+  await store.serverAction("survivor", "survival", { result });
+  assert.equal(store.getUser("survivor").pearls, 24);
+  assert.equal(store.getUser("survivor").rescue.runs.length, 1);
+  await assert.rejects(
+    store.serverAction("survivor", "survival", {
+      result: { ...result, id: "bad", lives: 0 },
+    }),
+  );
+  await assert.rejects(
+    store.serverAction("survivor", "survival", {
+      result: { ...result, id: "bad2", pearls: 999 },
+    }),
+  );
+  globalThis.fetch = service.browser();
+  globalThis.localStorage = memory();
+  globalThis.sessionStorage = memory();
+  await auth.login("Survivor", "reef123");
+  assert.equal(store.getUser("survivor").rescue.runs[0].lives, 1);
+  assert.equal(store.getUser("survivor").pearls, 24);
+});

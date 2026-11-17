@@ -1979,7 +1979,7 @@ body {
     animation: none !important;
   }
 }
-@media (max-width: 760px) {
+@media (max-width: 767px) {
   .rail-logout {
     width: auto;
     min-width: 64px;
@@ -2001,7 +2001,7 @@ body:has(.auth-shell) > .ocean-decoration .water-bubble {
 }
 
 /* Keep the supplied five navigation actions inside one phone bar. */
-@media (max-width: 760px) {
+@media (max-width: 767px) {
   .nav-rail {
     display: flex;
     flex-direction: row;

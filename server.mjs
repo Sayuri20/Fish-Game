@@ -16,6 +16,7 @@ const contentTypes = {
   ".js": "text/javascript; charset=utf-8",
   ".css": "text/css; charset=utf-8",
   ".svg": "image/svg+xml",
+  ".png": "image/png",
   ".ttf": "font/ttf",
 };
 
@@ -32,7 +33,7 @@ async function handleRequest(request, response, handleAuth) {
     }
     let path = resolve(root, "." + name);
     let location = relative(root, path);
-    // AI assistance helped check that a request cannot leave the public folder.
+    // Here I only allow files from the public folder.
     if (location.startsWith("..") || isAbsolute(location)) {
       response.writeHead(403);
       response.end("Forbidden");

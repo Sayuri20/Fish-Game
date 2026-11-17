@@ -5,6 +5,7 @@
  * Reference: https://nodejs.org/api/crypto.html
  */
 import { randomBytes, scrypt, timingSafeEqual } from "node:crypto";
+import { findBonus } from "./dist/js/workshop.js";
 
 function newProfile() {
   return {
@@ -16,7 +17,7 @@ function newProfile() {
   };
 }
 
-// The server checks result fields before storing them.
+// I check the result values before saving them.
 function checkResult(result) {
   if (!result || typeof result.id !== "string" || result.id.length > 100) {
     throw new Error("Invalid game result.");
@@ -57,8 +58,7 @@ function reply(response, status, data, cookie) {
   response.end(JSON.stringify(data));
 }
 
-// AI assistance was used because request data arrives through network events.
-// The limit prevents a client sending an unlimited amount of login data.
+// Here I read the JSON and check that the request is not too large.
 function readBody(request) {
   return new Promise(function (resolve, reject) {
     let contentType = request.headers["content-type"];
@@ -122,7 +122,7 @@ function cookieToken(request) {
   return null;
 }
 
-// AI assistance was used to call a standard password KDF, not invent a hash.
+// I use scrypt here to check passwords safely.
 function derivePassword(password, salt) {
   return new Promise(function (resolve, reject) {
     scrypt(password, salt, 64, function (error, key) {
@@ -139,7 +139,7 @@ export function createAuthHandler(database, secureCookies) {
   if (secureCookies === undefined) {
     secureCookies = false;
   }
-  // Map is a built-in lookup table. Each server instance owns these sessions.
+  // I keep the signed-in sessions here on the server.
   let sessions = new Map();
   let attempts = new Map();
 
@@ -203,7 +203,7 @@ export function createAuthHandler(database, secureCookies) {
     }
     let salt = randomBytes(16).toString("hex");
     let key = await derivePassword(password, salt);
-    // Another signup may have completed while password hashing was running.
+    // I check again because another signup could finish during hashing.
     if (database.findUser(id) !== null) {
       reply(response, 409, { error: "That explorer name is already taken." });
       return;
@@ -224,7 +224,7 @@ export function createAuthHandler(database, secureCookies) {
       salt = account.salt;
       expected = Buffer.from(account.passwordHash, "hex");
     }
-    // A dummy derivation keeps an unknown name from returning immediately.
+    // I also run the hash for unknown names so the reply is not faster.
     let candidate = await derivePassword(password, salt);
     let correct = false;
     if (account !== null && expected.length === candidate.length) {
@@ -263,6 +263,11 @@ export function createAuthHandler(database, secureCookies) {
         reply(response, 200, { user: user });
         return true;
       }
+      if (request.method === "GET" && path === "/api/auth/leaderboard") {
+        if (!session) reply(response, 401, { error: "Please sign in again." });
+        else reply(response, 200, database.leaderboard(session.user.id));
+        return true;
+      }
       if (request.method !== "POST") {
         reply(response, 405, { error: "Method not allowed." });
         return true;
@@ -289,7 +294,180 @@ export function createAuthHandler(database, secureCookies) {
         let profile = database.loadProgress(session.user.id);
         if (!profile) profile = newProfile();
         let changed = false;
-        if (body.action === "correct") {
+        if (!profile.rescue) {
+          profile.rescue = {
+            captain: "hamster",
+            restored: [],
+            matches: [],
+            deepest: 0,
+          };
+        }
+        if (body.action === "survival") {
+          const result = body.result;
+          if (
+            !result ||
+            typeof result.id !== "string" ||
+            result.id.length > 100 ||
+            !Number.isInteger(result.score) ||
+            result.score < 0 ||
+            result.score > 2500 ||
+            !Number.isInteger(result.pearls) ||
+            result.pearls < 0 ||
+            result.pearls > 180 ||
+            !Number.isInteger(result.lives) ||
+            result.lives < 0 ||
+            result.lives > 3 ||
+            !Number.isInteger(result.level) ||
+            result.level < 0 ||
+            result.level > 4 ||
+            !Number.isInteger(result.correct) ||
+            result.correct < 0 ||
+            result.correct > 40 ||
+            !Number.isInteger(result.stuns) ||
+            result.stuns < 0 ||
+            result.stuns > 100 ||
+            typeof result.completed !== "boolean" ||
+            (result.completed && (result.lives < 1 || result.level !== 4))
+          )
+            throw new Error("Invalid survival result.");
+          if (!profile.rescue.runs) profile.rescue.runs = [];
+          if (!profile.rescue.rewarded) profile.rescue.rewarded = [];
+          if (!profile.rescue.rewarded.includes(result.id)) {
+            profile.rescue.runs.unshift({
+              id: result.id,
+              character: ["turtle", "fish", "mermaid"].includes(
+                result.character,
+              )
+                ? result.character
+                : "turtle",
+              score: result.score,
+              pearls: result.pearls,
+              lives: result.lives,
+              level: result.level,
+              correct: result.correct,
+              stuns: result.stuns,
+              completed: result.completed,
+              date: new Date().toISOString(),
+            });
+            let bestScore = profile.rescue.bestScore || 0;
+            for (const run of profile.rescue.runs)
+              bestScore = Math.max(bestScore, run.score);
+            profile.rescue.bestScore = bestScore;
+            profile.rescue.runs = profile.rescue.runs.slice(0, 30);
+            profile.pearls += result.pearls;
+            profile.rescue.rewarded.push(result.id);
+            profile.rescue.deepest = Math.max(
+              profile.rescue.deepest,
+              result.level,
+            );
+            changed = true;
+          }
+        } else if (body.action === "workshop-buy") {
+          const bonus = findBonus(body.bonus);
+          if (!bonus) throw new Error("Choose a workshop bonus.");
+          if (!profile.rescue.workshop)
+            profile.rescue.workshop = { prepared: null, active: null };
+          const workshop = profile.rescue.workshop;
+          if (workshop.prepared)
+            throw new Error("A bonus is already packed for your next dive.");
+          if (profile.pearls < bonus.price)
+            throw new Error("You need " + bonus.price + " pearls.");
+          profile.pearls -= bonus.price;
+          workshop.prepared = bonus.id;
+          changed = true;
+        } else if (body.action === "workshop-launch") {
+          if (
+            typeof body.diveId !== "string" ||
+            !/^[a-zA-Z0-9-]{1,100}$/.test(body.diveId)
+          )
+            throw new Error("Invalid dive.");
+          if (!profile.rescue.workshop)
+            profile.rescue.workshop = { prepared: null, active: null };
+          const workshop = profile.rescue.workshop;
+          if (!workshop.active || workshop.active.diveId !== body.diveId) {
+            workshop.active = {
+              diveId: body.diveId,
+              bonus: workshop.prepared,
+              used: false,
+            };
+            workshop.prepared = null;
+            changed = true;
+          }
+        } else if (body.action === "workshop-use") {
+          const active =
+            profile.rescue.workshop && profile.rescue.workshop.active;
+          if (
+            !active ||
+            active.diveId !== body.diveId ||
+            !findBonus(active.bonus)
+          )
+            throw new Error("No packed bonus for this dive.");
+          if (!active.used) {
+            active.used = true;
+            changed = true;
+          }
+        } else if (body.action === "captain") {
+          if (!["hamster", "turtle", "fish", "mermaid"].includes(body.captain))
+            throw new Error("Invalid captain.");
+          profile.rescue.captain = body.captain;
+        } else if (body.action === "restore") {
+          if (!Number.isInteger(body.spot) || body.spot < 0 || body.spot > 5)
+            throw new Error("Invalid reef patch.");
+          if (!profile.rescue.restored.includes(body.spot)) {
+            if (profile.pearls < 2)
+              throw new Error("Earn 2 pearls to restore this patch.");
+            profile.pearls -= 2;
+            profile.rescue.restored.push(body.spot);
+            changed = true;
+          }
+        } else if (body.action === "expedition") {
+          let result = body.result;
+          if (
+            !result ||
+            typeof result.id !== "string" ||
+            result.id.length > 100 ||
+            !Number.isInteger(result.score) ||
+            result.score < 0 ||
+            result.score > 300 ||
+            !Number.isInteger(result.rivalScore) ||
+            result.rivalScore < 0 ||
+            result.rivalScore > 300 ||
+            typeof result.completed !== "boolean" ||
+            !Number.isInteger(result.correct) ||
+            result.correct < 0 ||
+            result.correct > 3 ||
+            (result.captain !== "hamster" && result.captain !== "turtle")
+          )
+            throw new Error("Invalid expedition.");
+          let exists = false;
+          for (let i = 0; i < profile.rescue.matches.length; i++) {
+            if (profile.rescue.matches[i].id === result.id) exists = true;
+          }
+          if (!exists) {
+            profile.rescue.matches.unshift({
+              id: result.id,
+              captain: result.captain,
+              score: result.score,
+              rivalScore: result.rivalScore,
+              completed: result.completed,
+              correct: result.correct,
+              date: new Date().toISOString(),
+            });
+            // I keep the reward ID so the same reward cannot be added twice.
+            if (!profile.rescue.rewarded) profile.rescue.rewarded = [];
+            if (!profile.rescue.rewarded.includes(result.id)) {
+              profile.pearls += result.completed
+                ? result.score > result.rivalScore
+                  ? 4
+                  : 3
+                : 1;
+              profile.rescue.rewarded.push(result.id);
+            }
+            profile.rescue.matches = profile.rescue.matches.slice(0, 30);
+            if (result.completed) profile.rescue.deepest = 2;
+            changed = true;
+          }
+        } else if (body.action === "correct") {
           let day = todayKey();
           if (!profile.daily[day])
             profile.daily[day] = { correct: 0, claimed: false };

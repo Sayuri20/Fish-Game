@@ -12,7 +12,7 @@ import {
   serverAction,
 } from "./storage.js";
 
-// AI assistance helped replace browser-only login with server-checked cookie sessions.
+// I send account requests to the server here.
 async function request(path, data) {
   let response;
   try {
@@ -51,7 +51,7 @@ async function request(path, data) {
 }
 async function rememberAccount(user) {
   let data = readStore();
-  // A display name is cached first; the full profile comes from SQLite.
+  // I keep the name here, then load the saved account.
   data.users[user.id] = { name: user.name };
   writeStore(data);
   sessionStorage.setItem("pearlpop.session", user.id);

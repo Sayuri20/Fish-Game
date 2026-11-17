@@ -45,7 +45,7 @@ export function openDatabase(databasePath, oldAccountsPath) {
     }
 
     function createUser(id, account) {
-      // Parameters keep user input separate from SQL instructions.
+      // I use parameters so user input is separate from the SQL query.
       database
         .prepare(
           "INSERT INTO users (id, name, salt, password_hash) VALUES (?, ?, ?, ?)",
@@ -70,7 +70,7 @@ export function openDatabase(databasePath, oldAccountsPath) {
         .run(id, JSON.stringify(profile));
     }
 
-    // Run once, in one transaction. An error rolls back every imported account.
+    // I import the old accounts together so a failed import saves none of them.
     function migrateAccounts() {
       let done = database
         .prepare("SELECT name FROM migrations WHERE name = ?")
@@ -116,10 +116,48 @@ export function openDatabase(databasePath, oldAccountsPath) {
     let migrate = database.transaction(migrateAccounts);
     migrate();
 
+    function leaderboard(currentId) {
+      const rows = database
+        .prepare(
+          "SELECT users.id, users.name, progress.profile_json FROM users JOIN progress ON users.id = progress.user_id",
+        )
+        .all();
+      const scores = [];
+      for (const row of rows) {
+        const profile = JSON.parse(row.profile_json);
+        const rescue = profile.rescue || {};
+        const runs = rescue.runs || [];
+        if (runs.length === 0 && rescue.bestScore === undefined) continue;
+        let best = rescue.bestScore || 0;
+        for (const run of runs) if (run.score > best) best = run.score;
+        scores.push({
+          name: row.name,
+          score: best,
+          isYou: row.id === currentId,
+        });
+      }
+      scores.sort(function (a, b) {
+        return b.score - a.score || a.name.localeCompare(b.name);
+      });
+      let rank = null;
+      for (let i = 0; i < scores.length; i++) {
+        scores[i].rank = i + 1;
+        if (scores[i].isYou) rank = i + 1;
+      }
+      return { leaders: scores.slice(0, 10), rank: rank, total: scores.length };
+    }
+
     function close() {
       database.close();
     }
-    return { findUser, createUser, loadProgress, saveProgress, close };
+    return {
+      findUser,
+      createUser,
+      loadProgress,
+      saveProgress,
+      leaderboard,
+      close,
+    };
   } catch (error) {
     database.close();
     throw error;

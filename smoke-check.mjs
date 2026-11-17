@@ -69,52 +69,24 @@ try {
     });
   }
   assert.match(node("#app").innerHTML, /Sign out/);
-  for (const screen of [
-    "modes",
-    "reef",
-    "history",
-    "settings",
-    "guide",
-    "daily",
-  ]) {
-    await click(screen);
-    assert.match(node("#app").innerHTML, /Back to play/);
-  }
-  const realNow = Date.now;
-  let now = realNow();
-  Date.now = () => now;
-  await click("start-timed");
-  assert.match(node("#app").innerHTML, /00:10/);
-  assert.equal(
-    (node("#app").innerHTML.match(/class="fish-arrival"/g) || []).length,
-    5,
-  );
   assert.doesNotMatch(
     node("#app").innerHTML,
-    /LIVE API|offline demo|Fish API by/,
+    /COUNTING PRACTICE|START TIMED|START PRACTICE/,
   );
-  await click("zoom");
-  assert.match(node("#app").innerHTML, /class="zoom-fish"/);
-  assert.doesNotMatch(node("#app").innerHTML, /zoomed-api/);
-  await click("close-zoom");
-
-  now += 5000;
-  ticks[0]();
-  assert.match(node("#answer-message").textContent, /choose a number/);
-  now += 6000;
-  ticks[0]();
-  assert.match(node("#app").innerHTML, /dialog/);
-  const advance = timers.find((t) => t.ms === 1200);
-  assert.ok(advance);
-  await advance.f();
-  // Wait for the async fetch chain triggered by the timeout callback.
-  for (let i = 0; i < 8; i++) await Promise.resolve();
-  assert.match(node("#app").innerHTML, /02 \/ 10/);
-  await click("modes");
-  assert.match(node("#app").innerHTML, /dialog/);
-  Date.now = realNow;
+  for (const screen of ["history", "settings", "guide"]) {
+    await click(screen);
+    assert.match(node("#app").innerHTML, /Back to play/);
+    assert.doesNotMatch(
+      node("#app").innerHTML,
+      /Timed mode|10 rounds|COUNTING PRACTICE/,
+    );
+  }
+  await click("hub");
+  assert.match(node("#app").innerHTML, /LET’S DIVE/);
+  await click("start-practice");
+  assert.doesNotMatch(node("#app").innerHTML, /START PRACTICE|YOUR ANSWER/);
   console.log(
-    "UI smoke passed: screen navigation, five cartoon fish, idle reminder, 10-second timeout auto-advance, leave confirmation.",
+    "UI smoke passed: main-game home, history, settings, survival guide; retired counting modes are unavailable.",
   );
 } finally {
   await service.close();

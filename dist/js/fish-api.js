@@ -32,7 +32,7 @@ export function parseQuestion(data) {
 }
 
 export async function fetchQuestion(signal) {
-  // AI assistance helped connect cancellation and the 15-second request limit.
+  // I stop the request if the API takes more than 15 seconds.
   let controller = new AbortController();
   function cancelRequest() {
     controller.abort();

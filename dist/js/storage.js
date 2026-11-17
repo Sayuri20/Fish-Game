@@ -46,8 +46,7 @@ export function dayKey(date) {
   );
 }
 
-// AI assistance helped connect saved progress to the authenticated server account.
-// The browser copy is a display cache. Server actions update the shared account.
+// I save progress on the server and keep a copy here to show on screen.
 let onlineAccount = null;
 let pendingSave = Promise.resolve();
 export function enableServerStorage(id) {
